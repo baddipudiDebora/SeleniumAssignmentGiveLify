@@ -67,10 +67,14 @@ public class LoginTest {
 	// invalid senario with not an email entered
 	public void InValidEmailsingInTest() throws InterruptedException {
 		WebElement alertnotvalidemail = driver.findElement(By.xpath("//input[@type='email']"));
-		alertnotvalidemail.sendKeys("Ananya123%%%");
-		alertnotvalidemail.sendKeys(Keys.TAB);
+		// to get a random number between 0 and 1, then mulitple by some number
+		double a = (Math.random() * 500);
+		// when we concatinate a number with a string --> gets converted to a string
+		String s = "!!!!!!!!!!!!!!!!!!!" + a + "!!!!!!!!!!!!!!!!!";
+		alertnotvalidemail.sendKeys(s);
+		alertnotvalidemail.click();
 
-				wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='sc-jAaTju gfVFPZ']")));
 
 		String actualalertEmail = driver.findElement(By.xpath("//span[contains(text(),'This field must')]")).getText();
@@ -118,6 +122,7 @@ public class LoginTest {
 		assertEquals(actualText,
 				"We could not find your email address. Can you please check your email address and try again.");
 	}
+
 	@Test(priority = 7)
 	public void validateForgotPwdinvalidtext() throws InterruptedException {
 		driver.findElement(By.xpath("//span[contains(text(),'Forgot password?')]")).click();
@@ -129,11 +134,9 @@ public class LoginTest {
 		wait.until(ExpectedConditions.presenceOfElementLocated(
 				By.xpath("//span[@class='sc-jAaTju gfVFPZ' and contains(text(),'This field')]")));
 		String actualText = driver
-				.findElement(By.xpath("//span[@class='sc-jAaTju gfVFPZ' and contains(text(),'This field')]"))
-				.getText();
-		
-		assertEquals(actualText,
-				"This field must be an email");
+				.findElement(By.xpath("//span[@class='sc-jAaTju gfVFPZ' and contains(text(),'This field')]")).getText();
+
+		assertEquals(actualText, "This field must be an email");
 	}
 
 	@AfterMethod
@@ -141,4 +144,5 @@ public class LoginTest {
 		driver.manage().deleteAllCookies();
 		driver.quit();
 	}
+
 }
