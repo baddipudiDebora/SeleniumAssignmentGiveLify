@@ -7,7 +7,6 @@
         <methods>
           <include name="UnRegisteredEmailSignInTest"/>
           <include name="openBrowser"/>
-          <include name="InValidEmailsingInTest"/>
           <include name="ValidSignInTest"/>
         </methods>
       </class> <!-- com.givelify.test.SignInTest -->

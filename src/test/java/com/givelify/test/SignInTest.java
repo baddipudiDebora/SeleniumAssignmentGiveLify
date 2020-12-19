@@ -15,9 +15,9 @@ public class SignInTest extends BaseClass {
 	@Test(priority = 1)
 	public void ValidSignInTest() throws InterruptedException {
 		landingpageobj.clickOnSIgnIn();
-		String validUserEmail = "debora11.2k@gmail.com";
+		String validUserEmail = "swaroop.22k@gmail.com";
 		// send the email and password as parameters to the method in Page Class
-		SinginWindowobj.doLogin("debora11.2k@gmail.com", "Remarkable@2020");
+		SinginWindowobj.doLogin("swaroop.22k@gmail.com", "Remarkable@2020");
 		// get the alert for donations and vlaidate if correct message
 		SinginWindowobj.validateSucessDonationMsg(validUserEmail);
 	}
