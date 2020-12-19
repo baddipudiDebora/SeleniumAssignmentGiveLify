@@ -12,39 +12,46 @@ import org.testng.Assert;
 import com.givelify.base.BaseClass;
 
 public class SigninWindow extends BaseClass {
-
+	// this class contains the locators, parametrized constructor, methods on the
+	// Webelements
 	// email
 	@FindBy(xpath = "//input[@type='email']")
 	private WebElement email;
-
-	// passoword
+	// password
 	@FindBy(xpath = "//input[@type='password']")
 	private WebElement password;
-
 	// forgotpassword
 	@FindBy(xpath = "//span[contains(text(),'Forgot password?')]")
 	private WebElement forgotpassword;
-
+	// notregisteredEmailSignINalert
+	@FindBy(xpath = "//div[contains(text(),'Your username and password ')]")
+	private WebElement inValidPasswordSignINalert;
 	// notregisteredEmailSignINalert
 	@FindBy(xpath = "//div[contains(text(),'Check the email address/password ')]")
 	private WebElement notregisteredEmailSignINalert;
-
 	// invalidEmailSignINalert
 	@FindBy(xpath = "//span[contains(text(),'This field must')]")
 	private WebElement invalidEmailSignINalert;
-
 	// alertpromtdonations
 	@FindBy(xpath = "//div[contains(text(),' sends donation')]")
 	private WebElement alertpromtdonations;
-
 	// signInWhenEnabled
 	@FindBy(xpath = "//button[contains(text(),'Sign In') and @color='skyblue']")
 	private WebElement submit;
-
 	// submitwhenDisabled
 	@FindBy(xpath = "//button[@color='disable' and @class='sc-EHOje gECnpk']")
 	private WebElement submitwhenDisabled;
+	// continueOnSuccess
+	@FindBy(xpath = "(//img[@class='up-down-arrow sc-cIShpX ifvisO'])[1]")
+	private WebElement arrowndownuser;
 
+	@FindBy(xpath = "//button[contains(text(),'Continue')]")
+	private WebElement continueOnSuccess;
+
+	@FindBy(xpath = "//span[contains(text(),'Logout')]")
+	private WebElement logOut;
+
+	// constructor
 	public SigninWindow(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
@@ -61,11 +68,18 @@ public class SigninWindow extends BaseClass {
 				+ validUserEmail + " for a Givelify verification email and click on the link in there.";
 		Assert.assertEquals(donationstext, expecteddonationtest);
 	}
+
 	public void validatenotregisteredEmailSignINalert() {
 		String donationstext = notregisteredEmailSignINalert.getText();
 		String expecteddonationtest = "Check the email address/password and try again. If you don't have an account to give on Givelify, you can sign up by pressing Join Givelify";
 		Assert.assertEquals(donationstext, expecteddonationtest);
 	}
+	public void validateIncorrectPwdNalert() {
+		String donationstext = inValidPasswordSignINalert.getText();
+		String expecteddonationtest = "Your username and password don't match.";
+		Assert.assertEquals(donationstext, expecteddonationtest);
+	}
+
 	public void validateNotanEmail() {
 		String actualalertEmail = invalidEmailSignINalert.getText();
 		String expectedalertEmail = "This field must be an email";
@@ -73,11 +87,21 @@ public class SigninWindow extends BaseClass {
 	}
 
 	public void verifysingInButnStatus() {
+		
 		Assert.assertFalse(submitwhenDisabled.isEnabled(),
 				"Sign In button is disabled as no email and no password is present");
-		
 	}
 
+	public void clickOnForgotPassword() {
+		forgotpassword.click();
+	}
 
+	public void clickContinue() {
+		continueOnSuccess.click();
+	}
 
+	public void clickDownArrowandLogout() {
+		arrowndownuser.click();
+		logOut.click();
+	}
 }

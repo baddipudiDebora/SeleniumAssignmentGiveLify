@@ -6,6 +6,8 @@
       <class name="com.givelify.test.SignInTest">
         <methods>
           <include name="UnRegisteredEmailSignInTest"/>
+          <include name="InValidPasswordTest"/>
+          <include name="singInButtonStatus"/>
           <include name="openBrowser"/>
           <include name="ValidSignInTest"/>
         </methods>

@@ -15,6 +15,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import com.givelify.pages.ForgotPasswordWindow;
 import com.givelify.pages.LandingPage;
 import com.givelify.pages.SigninWindow;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -23,14 +24,13 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class BaseClass {
 	public static WebDriver driver;
-	public static Logger log = Logger.getLogger("devpinoyLogger");
+//	public static Logger log = Logger.getLogger("devpinoyLogger");
 	public static WebDriverWait wait;
-	public static ExtentTest test;
 	public static String browser;
-	
-	// two page clases are declared here
+	// three page clases are declared here
 	public LandingPage landingpageobj;
-	public SigninWindow SinginWindowobj;
+	public SigninWindow signinWindowobj;
+	public ForgotPasswordWindow forgotemailwinobj;
 
 	@BeforeTest
 	public void openBrowser() {
@@ -44,17 +44,13 @@ public class BaseClass {
 			options.setExperimentalOption("prefs", prefs);
 			options.addArguments("--disable-extensions");
 			options.addArguments("--disable-infobars");
-
 			driver = new ChromeDriver(options);
-			log.debug("Launching Chrome");
+			// log.debug("Launching Chrome");
 		} else if (Constants.browser.equals("ie")) {
-
 			System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
-
 			driver = new InternetExplorerDriver();
-			log.debug("Launching IE");
+			// log.debug("Launching IE");
 		}
-
 		driver.get(Constants.testsiteurl);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -62,8 +58,8 @@ public class BaseClass {
 		// two page clases are instantiated here with a parameterized Constructor
 		// passing the Webdriver reference
 		landingpageobj = new LandingPage(driver);
-		SinginWindowobj = new SigninWindow(driver);
-
+		signinWindowobj = new SigninWindow(driver);
+		forgotemailwinobj = new ForgotPasswordWindow(driver);
 	}
 
 	public static void click(WebElement element) {
@@ -82,9 +78,7 @@ public class BaseClass {
 		 * " entered value as " + value);
 		 */
 	}
-
 	/*
 	 * @AfterSuite public void quitBrowser() { driver.quit(); }
 	 */
-
 }

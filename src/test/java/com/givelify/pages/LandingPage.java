@@ -10,7 +10,7 @@ import com.givelify.base.BaseClass;
 
 public class LandingPage extends BaseClass {
 	@FindBy(xpath = "//span[contains(text(),'Sign In')]")
-	public WebElement singIN;
+	private WebElement singIN;
 
 	public LandingPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -19,7 +19,6 @@ public class LandingPage extends BaseClass {
 
 	public void clickOnSIgnIn() {
 		singIN.click();
-
 	}
 
 }
